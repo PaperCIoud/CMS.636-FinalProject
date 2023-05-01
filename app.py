@@ -12,6 +12,7 @@ import helpers
 app = Dash(__name__, use_pages=True)
 
 app.layout = html.Div(children=[
+    dcc.Store(id="buttonlog", data={"buttonClicked": 0}), 
     dash.page_container,
     #html.H1(children='MuseConnects', style={'fontSize': 50, 'testAlign': 'center'}),
 
