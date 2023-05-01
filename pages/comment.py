@@ -3,11 +3,33 @@ import plotly.express as px
 import pandas as pd
 import dash
 import dash_bootstrap_components as dbc
+from helpers import *
 
 dash.register_page(__name__, path='/comment')
 
-layout = html.Div(children=[
-    html.Div(children='Comment', style={'fontSize': 50, 'textAlign': 'center'}),
 
 
-])
+def getlayout(): 
+    page = html.Div(children=[
+            html.Div(children='Comment', style={'fontSize': 50, 'textAlign': 'center'}),
+            #html.Div(children= getTop9()[buttonClicked][1], style={'fontSize': 50, 'textAlign': 'center'}),
+
+            
+            dbc.Container (
+            
+            [
+                html.Div([
+                    dbc.Label("Your Comment", html_for="comment-form"),
+                    dbc.Input(type="text", id="comment-form")
+                ]),
+            ]),
+
+            html.Div (dbc.Button('Submit', id='submitCommentButton', href='/responseEnd',), style={'text-align': 'center'}),
+
+            html.Div (id = 'dummyOutput', style={"visibility": False})
+
+        ])
+    return page
+    
+
+layout = getlayout
