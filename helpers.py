@@ -5,11 +5,12 @@ import dash
 import dash_bootstrap_components as dbc
 import sqlite3
 import time
+import os
 
 buttonClicked = "0"
-
-collection_path = "/home/amyni/cms.636/data/collection.db"
-comment_path = "/home/amyni/cms.636/data/comments.db"
+current = os.getcwd()
+collection_path = current + "/data/collection.db"
+comment_path = current + "/data/comments.db"
 def insertRow(text, likes, name, year):
     conn = sqlite3.connect(collection_path)
     cursor = conn.cursor()
@@ -66,29 +67,35 @@ def getComments(response):
 
     return data
 
-def getResponseCards():
-    data = getTop9()
-    cards = []
-    i = 0
-    for response in data:
-        comments = getComments(response[1])
-        cardContent = [dbc.CardBody([
-                          html.P(response[1], style={'textAlign': 'center'}),
-                          html.P(response[3], style={'textAlign': 'right'}),
-                          html.Div(dbc.Button('comment', id='commentButton' + str(i), href='/comment'), style={'text-align': 'center'}),
-                      ])]
-        for x in comments:
-            cardContent.append(dbc.CardFooter([html.P(x[1], style={'textAlign': 'center'})]))
+def getLikes(response):
+    conn = sqlite3.connect(collection_path)
+    cursor = conn.cursor()
+    sql = '''
+            SELECT likes FROM collection
+            WHERE response IS ?
+            ORDER BY id DESC
+            LIMIT 1;
+          ''' 
+    cursor.execute(sql, (response,))
+    data = cursor.fetchall()
 
-        card = (
-            dbc.Card(
-                cardContent
-            )
-        )
-        #cards[i%3].append(card)
-        cards.append(card)
-        i += 1
-    return cards
+    return data
+
+def updateLikes(response, newLikes):
+    conn = sqlite3.connect(collection_path)
+    cursor = conn.cursor()
+    sql = '''
+            UPDATE collection
+            SET likes = ?
+            WHERE response IS ?
+            LIMIT 1
+          ''' 
+    cursor.execute(sql, (newLikes, response))
+    conn.commit()
+    cursor.close()
+
+    conn.close()
+
 
 def getButtonClicked():
     return buttonClicked

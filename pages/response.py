@@ -20,7 +20,7 @@ layout = html.Div(children=[
     [
         html.Div([
             dbc.Label("Response", html_for="response-form"),
-            dbc.Input(type="text", id="response-form")
+            dbc.Textarea(id="response-form")
         ]),
 
         html.Div([

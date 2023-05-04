@@ -13,7 +13,7 @@ layout = html.Div(children=[
     html.Div([
         html.Div(dbc.Button('Share', id='responseButton', href='/',), style={'text-align': 'center'}),
         html.Br(),
-        html.Div(dbc.Button('Return', id='commentButton', href='/prompt',), style={'text-align': 'center'})
+        html.Div(dbc.Button('Return', id='commentButton', href='/',), style={'text-align': 'center'})
     ]),
 
 ])
