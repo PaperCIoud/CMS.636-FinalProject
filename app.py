@@ -11,6 +11,8 @@ import helpers
 
 app = Dash(__name__, use_pages=True)
 
+server = app.server
+
 app.layout = html.Div(children=[
     dcc.Store(id="buttonlog", data={"buttonClicked": 0}), 
     dash.page_container,
