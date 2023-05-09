@@ -86,7 +86,7 @@ def getResponseCards():
 
 layout = html.Div([
     html.Div(id="log", style={'display': 'none'}),
-    dcc.Interval(id='refresh', interval=1000),
+    dcc.Interval(id='refresh', interval=1500),
     html.Div(id='content', className="container"),
 ])
 
