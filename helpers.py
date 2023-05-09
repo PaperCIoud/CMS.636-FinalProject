@@ -19,8 +19,14 @@ def insertRow(text, likes, name, year):
             (id, response, likes, name, year)
             VALUES (?,?,?,?,?);
           '''
-    cursor.execute(''' SELECT COUNT(id) FROM collection; ''')
+    delete = '''
+            DELETE FROM collection
+            ORDER BY id ASC
+            LIMIT 1
+          '''
+    
     cursor.execute(sql, (time.time() , text, likes, name, year))
+    cursor.execute(delete)
     conn.commit()
     cursor.close()
 
@@ -47,6 +53,7 @@ def addComment(response, comment):
             (response, comment, time)
             VALUES (?,?,?);
           '''
+    
     cursor.execute(sql, (response, comment, time.time()))
     conn.commit()
     cursor.close()
