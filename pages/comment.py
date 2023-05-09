@@ -9,24 +9,39 @@ dash.register_page(__name__, path='/comment')
 
 
 def getlayout(): 
-    page = html.Div(children=[
-            html.Div(children='Comment', style={'fontSize': 50, 'textAlign': 'center'}),
-            html.Div(children= "", style={'fontSize': 50, 'textAlign': 'center'}, id='responseContent'),
+    page = dbc.Container(children=[
+                dbc.Row([
+                        dbc.Col(
+                            dbc.Button(
+                                    html.I(className="bi bi-house-door-fill", style={"font-size": "2rem"}), 
+                                    id='homeButton', href='/', color = "light"
+                                ), 
+                            style={'text-align': 'right',},
+                        )
+                    ],
+                ),
+                dbc.Row(
+                    dbc.Col(
+                        "",
+                        id='responseContent'
+                    ),
+                    style={'fontSize': 50, 'textAlign': 'center','margin-top': '10%'}, 
+                ),
 
-            dbc.Container (
-        
-        [
-            html.Div([
-                dbc.Label("Your Comment", html_for="comment-form"),
-                dbc.Input(type="text", id="comment-form")
-            ]),
-        ]),
+                dbc.Row ([
+                    dbc.Label("Your Comment", html_for="comment-form"),
+                    dbc.Textarea(id="comment-form", rows=5, style={"border":"2px solid black"})
+                ], style={'margin-top': '5%'}),
+                dbc.Row (
+                    html.Div (dbc.Button('Submit', id='submitCommentButton', href='/commentEnd', color="dark"), style={'text-align': 'center'}),
+                    style={'margin-top': '5%',}
+                ),
+            
+                html.Div (id = 'COutput', style={"visibility": False})
 
-        html.Div (dbc.Button('Submit', id='submitCommentButton', href='/commentEnd',), style={'text-align': 'center'}),
-
-        html.Div (id = 'COutput', style={"visibility": False})
-
-        ])
+            ],
+            
+        )
     return page
     
 

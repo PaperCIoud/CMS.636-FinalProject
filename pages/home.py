@@ -19,7 +19,7 @@ layout = html.Div(children=[
                     html.Div(children='Tracing Threads', style={'fontSize': 100, 'textAlign': 'center'}, className="home_text"),
 
                     html.Div(
-                        dbc.Button('next', id='nextButton', href='/prompt', color='dark', className="home_next"), 
+                        dbc.Button('Enter Here', id='nextButton', href='/prompt', color='dark', className="home_next"), 
                     ),
                 ],
                 

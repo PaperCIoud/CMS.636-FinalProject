@@ -10,7 +10,7 @@ layout = dbc.Container(children=[
     dbc.Row(
         [
             dbc.Col([
-                    html.Div(children='What are the benefits to knowning the story behind the production of a good, like the shirt on your back or the shoes on your feet?', 
+                    html.Div(children='What are the benefits to knowing the story behind the production of a good, like the shirt on your back or the shoes on your feet?', 
                     style={'fontSize': 50, 'text-align': 'center'}),
                     html.Br(),
                     html.Br(),

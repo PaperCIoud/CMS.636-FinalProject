@@ -9,7 +9,7 @@ import dash_bootstrap_components as dbc
 import sys
 import helpers
 
-app = Dash(__name__, use_pages=True)
+app = Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.BOOTSTRAP])
 
 server = app.server
 

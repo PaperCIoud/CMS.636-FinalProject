@@ -6,14 +6,19 @@ import dash_bootstrap_components as dbc
 
 dash.register_page(__name__, path='/responseEnd')
 
-layout = html.Div(children=[
-    html.Div(children='Thank you for adding. Find your response on the wall!', 
-             style={'fontSize': 50, 'text-align': 'center'}),
-    html.Br(),
-    html.Div([
-        html.Div(dbc.Button('Share', id='responseButton', href='/',), style={'text-align': 'center'}),
+layout = dbc.Container(children=[
+        dbc.Row(
+            dbc.Col(children='Thank you for adding.'), 
+            style={'margin-top': '10%'}
+        ),
+        dbc.Row(
+            dbc.Col(children='Find your response on the screen!'), 
+        ),
         html.Br(),
-        html.Div(dbc.Button('Return', id='commentButton', href='/',), style={'text-align': 'center'})
-    ]),
+        dbc.Row([
+            html.Div(dbc.Button('Return', id='commentendButton', href='/',color="dark"), style={'text-align': 'center'})
+        ]),
 
-])
+    ],
+    style={'fontSize': 50, 'text-align': 'center'}
+)

@@ -5,7 +5,7 @@ import dash
 import dash_bootstrap_components as dbc
 from helpers import *
 
-dash.register_page(__name__, path='/collection', suppress_callback_exceptions=True)
+dash.register_page(__name__, path='/collection', suppress_callback_exceptions=True, external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.BOOTSTRAP])
 
 # data = getTop9()
 # print(data)
@@ -36,13 +36,30 @@ def getResponseCards():
                               dbc.Row([
                                   dbc.Col(
                                     [
-                                        html.Div(dbc.Button('comment', id='commentButton' + str(i), href='/comment'), style={'text-align': 'center'}),
+                                        html.Div(
+                                            dbc.Button(
+                                                html.I(className="bi bi-chat-left-dots"),
+                                                id='commentButton' + str(i), href='/comment',
+                                                color = "light"
+                                            ), 
+                                            style={'text-align': 'center'}
+                                        ),
                                     ],
-                                    width=4
+                                    width=2
                                   ),
                                   dbc.Col(
                                     [
-                                        html.Div(dbc.Button(['like', html.Sub(response[2], id="likeCount"+str(i))], id='likeButton' + str(i), style={'text-align': 'center'}),),
+                                        html.Div(
+                                            dbc.Button(
+                                                [
+                                                    html.I(className="bi bi-heart"), 
+                                                    html.Sub(response[2], id="likeCount"+str(i))
+                                                ], 
+                                                id='likeButton' + str(i), 
+                                                style={'text-align': 'center'},
+                                                color="light"
+                                            ),
+                                        ),
                                     ],
                                     width=4
                                   )
@@ -78,19 +95,15 @@ layout = html.Div([
 def display_layout(n):
     cards = getResponseCards()
     
-    page = html.Div(children=[
-        html.Div(children='Collection', style={'fontSize': 50, 'textAlign': 'Left'}),
-        html.Div(dbc.Button('home', id='homeButton', href='/',), style={'text-align': 'right'}),
-        
-        dbc.Container([
-                dbc.Row(
+    allCards = [dbc.Row(
                     [
                         dbc.Col(cards[0], width=4,),
                         dbc.Col(cards[1], width=4,),
                         dbc.Col(cards[2], width=4,)
                     ],
                     align="start",
-                    className="h-50",
+                    #className="h-50",
+                    style={'margin-top': '20px', 'margin-bottom': '10px'}
                 ),
                 dbc.Row(
                     [
@@ -100,7 +113,8 @@ def display_layout(n):
                         
                     ],
                     align='center',
-                    className="h-50"
+                    style={'margin-top': '20px', 'margin-bottom': '10px'}
+                    #className="h-50"
                     #justify="evenly"
                 ),
                 dbc.Row(
@@ -110,14 +124,42 @@ def display_layout(n):
                         dbc.Col(cards[8], width=4,),
                     ],
                     align='center',
-                    className="h-50"
+                    style={'margin-top': '20px', 'margin-bottom': '10px'}
+                    #className="h-50"
                     #justify="evenly"
-                ),
-            ],
-            style={"height": "auto"}
-        )
+                ),]
+    
+    page = dbc.Container(children=[
+            
+            
+            dbc.Row([
+                    dbc.Col(
+                        html.Div(children='Gallery', style={'fontSize': 50, 'textAlign': 'Left'}),
+                    ),
+                    dbc.Col(
+                        dbc.Button(
+                                html.I(className="bi bi-house-door-fill", style={"font-size": "2rem"}), 
+                                id='homeButton', href='/', color = "light"
+                            ), 
+                        style={'text-align': 'right',},
+                    )
+                ],
+                align="center",
+                className="h-50"
+            ),
+            dbc.Row(
+                [
+                    html.P("Add your response on the tablet below", style={'fontSize': 25, 'textAlign': 'Left'})
+                ]
+            ),
+
+            *allCards
         
-    ])
+            
+        ],
+        fluid=True
+        #style={"height":"auto"}
+    )
     
     return page
 
