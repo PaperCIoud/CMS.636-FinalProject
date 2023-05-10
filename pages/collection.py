@@ -147,9 +147,11 @@ def display_layout(n):
                 align="center",
                 className="h-50"
             ),
+            html.Hr(style={'borderWidth': "0.1vh", "width": "100%", "borderColor": "#000000","opacity": "unset"}),
             dbc.Row(
                 [
-                    html.P("Add your response on the tablet below", style={'fontSize': 25, 'textAlign': 'Left'})
+                    html.P("What are the benefits to knowing the story behind the production of a good, like the shirt on your back or the shoes on your feet?", style={'fontSize': 30, 'textAlign': 'center'}),
+                    html.P("Add your response on the tablet below!", style={'fontSize': 25, 'textAlign': 'center'})
                 ]
             ),
 
